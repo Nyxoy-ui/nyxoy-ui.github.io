@@ -20,6 +20,12 @@ Nyxoy Stories ist eine Wattpad-inspirierte Progressive Web App für Web, Android
 | Autor | `mira@nyxoy.io` | `author123` |
 | Leser | `lina@nyxoy.io` | `reader123` |
 
+## Admin-Login finden
+
+- Auf der Startseite ist oben rechts ein eigener Button **Admin-Login** sichtbar.
+- Alternativ im Login-Bereich die hervorgehobene Karte **Admin-Login** auswählen und anschließend **Jetzt einloggen** klicken.
+- Falls der Browser eine alte PWA-Version gecacht hat, einmal neu laden; der Service Worker wurde für diese Änderung aktualisiert.
+
 ## Entwicklung
 
 ```bash
