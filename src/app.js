@@ -132,7 +132,7 @@ function nav() {
         <button data-nav="design">Design</button>
       </nav>
       <div class="session">
-        ${user ? `<span class="pill">${escapeHtml(user.name)} · ${roleLabel(user.role)}</span><button class="ghost" id="logout">Logout</button>` : '<button class="ghost" data-nav="login">Login</button><button class="primary" data-login-as="admin">Admin-Login</button>'}
+        ${user ? `<span class="pill">${escapeHtml(user.name)} · ${roleLabel(user.role)}</span><button class="ghost" id="logout">Logout</button>` : '<button class="primary" data-nav="login">Login</button>'}
       </div>
     </header>`;
 }
@@ -194,22 +194,20 @@ function feature(title, text) {
 
 function renderLogin() {
   layout(`
-    <section class="panel login-panel">
+    <section class="panel narrow">
       <span class="eyebrow">Demo-Zugänge</span>
       <h2>Einloggen</h2>
-      <p class="login-hint">Wähle zuerst deine Rolle. Für die Verwaltung gibt es jetzt einen deutlich sichtbaren <strong>Admin-Login</strong>.</p>
-      <div class="role-login-grid" aria-label="Schnellauswahl für Login-Rollen">
-        ${loginRoleCard('admin', 'Admin-Login', 'Nutzer verwalten und neue Autoren anlegen.', 'admin@nyxoy.io', 'admin123')}
-        ${loginRoleCard('author', 'Autor-Login', 'Eigene Bücher schreiben und Fragen einfügen.', 'mira@nyxoy.io', 'author123')}
-        ${loginRoleCard('reader', 'Leser-Login', 'Bibliothek stöbern und Kapitel lesen.', 'lina@nyxoy.io', 'reader123')}
-      </div>
-      <form id="login-form" class="stack login-form-card">
-        <h3>Ausgewählter Zugang</h3>
+      <form id="login-form" class="stack">
         <label>E-Mail<input name="email" type="email" value="admin@nyxoy.io" autocomplete="email" required /></label>
         <label>Passwort<input name="password" type="password" value="admin123" autocomplete="current-password" required /></label>
-        <button class="primary" type="submit">Jetzt einloggen</button>
+        <button class="primary" type="submit">Login</button>
         <p id="login-error" class="error" role="alert"></p>
       </form>
+      <div class="demo-logins">
+        <button data-demo="admin@nyxoy.io|admin123">Admin</button>
+        <button data-demo="mira@nyxoy.io|author123">Autor</button>
+        <button data-demo="lina@nyxoy.io|reader123">Leser</button>
+      </div>
     </section>`);
   byId('login-form').addEventListener('submit', (event) => {
     event.preventDefault();
@@ -218,22 +216,9 @@ function renderLogin() {
   });
   document.querySelectorAll('[data-demo]').forEach((button) => button.addEventListener('click', () => {
     const [email, password] = button.dataset.demo.split('|');
-    fillLogin(email, password);
+    document.querySelector('[name="email"]').value = email;
+    document.querySelector('[name="password"]').value = password;
   }));
-}
-
-function loginRoleCard(role, title, text, email, password) {
-  return `<button class="role-login-card ${role === 'admin' ? 'admin-card' : ''}" data-demo="${email}|${password}" type="button">
-    <span>${title}</span>
-    <small>${text}</small>
-    <code>${email}</code>
-  </button>`;
-}
-
-function fillLogin(email, password) {
-  document.querySelector('[name="email"]').value = email;
-  document.querySelector('[name="password"]').value = password;
-  byId('login-error').textContent = '';
 }
 
 function renderLibrary() {
@@ -421,10 +406,6 @@ function renderDesign() {
 
 function bindGlobalEvents() {
   document.querySelectorAll('[data-nav]').forEach((button) => button.addEventListener('click', () => navigate(button.dataset.nav)));
-  document.querySelectorAll('[data-login-as="admin"]').forEach((button) => button.addEventListener('click', () => {
-    navigate('login');
-    fillLogin('admin@nyxoy.io', 'admin123');
-  }));
   byId('logout')?.addEventListener('click', logout);
 }
 

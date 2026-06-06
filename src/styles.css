@@ -42,7 +42,6 @@ footer { padding: 28px; text-align: center; color: var(--muted); }
 .brand small { display:block; color: var(--muted); font-size: 0.74rem; }
 .brand-mark { display:grid; place-items:center; width:42px; height:42px; border-radius: 15px; color:white; background: linear-gradient(135deg, var(--accent), var(--secondary)); font-weight:800; }
 .nav-links, .session, .hero-actions, .answer-row, .demo-logins { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-.session { justify-content: flex-end; }
 .nav-links button, .ghost, .glass, .demo-logins button, .chapter-tab, .user-row button, form button:not(.primary) {
   padding: 10px 14px; border-radius: 999px; background: rgba(255,255,255,0.72); color: var(--ink); border: 1px solid var(--line);
 }
@@ -109,8 +108,7 @@ textarea { min-height: 110px; resize: vertical; }
 
 @media (max-width: 860px) {
   .topbar { align-items:flex-start; flex-direction:column; }
-  .session { justify-content: flex-start; }
-  .hero, .feature-grid, .book-grid, .dashboard, .reader-shell, .book-card, .role-login-grid { grid-template-columns: 1fr; }
+  .hero, .feature-grid, .book-grid, .dashboard, .reader-shell, .book-card { grid-template-columns: 1fr; }
   .hero { min-height: auto; padding-top: 28px; }
   .phone-preview { max-width: 390px; margin: 0 auto; }
   .chapter-list { position: static; }
